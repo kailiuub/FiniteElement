@@ -121,19 +121,19 @@ class App(QMainWindow):
         self.tabs.addTab(self.tab1,'Schematic')
         self.tabs.addTab(self.tab2,'Equations')
         # create tab1
-        self.tab1_layout=QVBoxLayout(self)
+        self.tab1_layout=QVBoxLayout()
         self.pix1=QPixmap('BarSchematic.jpg')
         self.pix1r=self.pix1.scaledToHeight(180)            # rescale pixmap
-        self.label1=QLabel(self)
+        self.label1=QLabel()
         self.label1.setAlignment(Qt.AlignCenter)            # Center Alignment of Label
         self.label1.setPixmap(self.pix1r)
         self.tab1_layout.addWidget(self.label1)
         self.tab1.setLayout(self.tab1_layout)
         # create tab2
-        self.tab2_layout=QVBoxLayout(self)
+        self.tab2_layout=QVBoxLayout()
         self.pix2=QPixmap('Eq.jpg')
         self.pix2r=self.pix2.scaledToHeight(180)
-        self.label2=QLabel(self)
+        self.label2=QLabel()
         self.label2.setAlignment(Qt.AlignCenter)
         self.label2.setPixmap(self.pix2r)
         self.tab2_layout.addWidget(self.label2)
@@ -168,7 +168,7 @@ class App(QMainWindow):
 
         # **** Create Plot *****
         self.mainW2=QWidget(self)
-        self.layout2=QVBoxLayout(self)
+        self.layout2=QVBoxLayout()
         self.fig=FF()
         self.layout2.addWidget(self.fig)
         self.mainW2.setLayout(self.layout2)
@@ -179,32 +179,26 @@ class App(QMainWindow):
         #   self.mainW3=QWidget(self)
         self.mainW3=QWidget(self)
         self.createTable(self.fig.nelem,2)
-        self.layout3=QVBoxLayout(self)
+        self.layout3=QVBoxLayout()
         self.layout3.addWidget(self.table)
         self.mainW3.setLayout(self.layout3)
         self.mainW3.move(270,40)
         self.mainW3.resize(220,230)
 
-        # **** Create QLabel to show instruction ****
+        # **** Create QLabel, Textinput, and Plot Button  ****
         self.mainW4=QWidget(self)
-        self.layout4=QVBoxLayout(self)
-        label3=QLabel('Enter Number of Elements',self)
-        self.layout4.addWidget(label3)
-        self.mainW4.setLayout(self.layout4)
-        self.mainW4.resize(200,40)
-        self.mainW4.move(20,1)
-        
-        # **** Create TextInput to input number of elements ****
+        self.layout4=QHBoxLayout()
+        self.label3=QLabel('Enter Number of Elements')
+        self.layout4.addWidget(self.label3)
         self.entry1=QLineEdit('11',self)
-        self.entry1.resize(50,20)
-        self.entry1.move(200,10) 
-        
-        # **** Create Plot Button to update charts
+        self.layout4.addWidget(self.entry1)
         self.but1=QPushButton('Plot',self)
         self.but1.clicked.connect(self.plotting)
-        self.but1.resize(40,20)
-        self.but1.move(270,10)
-
+        self.layout4.addWidget(self.but1)
+        self.mainW4.setLayout(self.layout4)
+        self.mainW4.resize(300,40)
+        self.mainW4.move(20,12)
+        
 
     @pyqtSlot()
     def aboutact(self):
